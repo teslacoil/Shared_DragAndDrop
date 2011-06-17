@@ -3,13 +3,6 @@ package com.teslacoilsw.shared.draganddrop.demo;
 
 import java.util.ArrayList;
 
-import com.teslacoilsw.shared.draganddrop.R;
-import com.teslacoilsw.shared.draganddrop.TouchInterceptorListView;
-import com.teslacoilsw.shared.draganddrop.R.drawable;
-import com.teslacoilsw.shared.draganddrop.R.id;
-import com.teslacoilsw.shared.draganddrop.R.layout;
-import com.teslacoilsw.shared.draganddrop.TouchInterceptorListView.DropListener;
-
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.teslacoilsw.shared.draganddrop.R;
+import com.teslacoilsw.shared.draganddrop.TouchInterceptorListView;
 
 public class TeslaDragAndDropDemo extends ListActivity {
 	private ListView mExampleList;
