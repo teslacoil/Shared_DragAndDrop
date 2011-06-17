@@ -4,11 +4,11 @@ package com.teslacoilsw.shared.draganddrop.demo;
 import java.util.ArrayList;
 
 import com.teslacoilsw.shared.draganddrop.R;
-import com.teslacoilsw.shared.draganddrop.TouchInterceptor;
+import com.teslacoilsw.shared.draganddrop.TouchInterceptorListView;
 import com.teslacoilsw.shared.draganddrop.R.drawable;
 import com.teslacoilsw.shared.draganddrop.R.id;
 import com.teslacoilsw.shared.draganddrop.R.layout;
-import com.teslacoilsw.shared.draganddrop.TouchInterceptor.DropListener;
+import com.teslacoilsw.shared.draganddrop.TouchInterceptorListView.DropListener;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -39,13 +39,13 @@ public class TeslaDragAndDropDemo extends ListActivity {
         for (String s : mArrayOptions)
         	mArrayListOptions.add(s);
         
-        ((TouchInterceptor) mExampleList).setDropListener(mDropListener);
+        ((TouchInterceptorListView) mExampleList).setDropListener(mDropListener);
         mExampleList.setAdapter(new ExampleArrayAdapter(getApplicationContext(), 
         		R.layout.dragrow, mArrayListOptions));
         
         mExampleList.setOnCreateContextMenuListener(this);
         mExampleList.setCacheColorHint(0);
-        ((TouchInterceptor) mExampleList).setDropListener(mDropListener);
+        ((TouchInterceptorListView) mExampleList).setDropListener(mDropListener);
         mExampleList.setDivider(null);
         mExampleList.setSelector(R.drawable.list_selector_background);
     }
@@ -54,7 +54,7 @@ public class TeslaDragAndDropDemo extends ListActivity {
     public void onDestroy() {
     	super.onDestroy();
         // clear the listeners so we won't get any more callbacks
-    	TouchInterceptor lv = (TouchInterceptor) getListView();
+    	TouchInterceptorListView lv = (TouchInterceptorListView) getListView();
         lv.setDropListener(null);
     }
     
@@ -98,8 +98,8 @@ public class TeslaDragAndDropDemo extends ListActivity {
 			return position;
 		}
     }
-    private TouchInterceptor.DropListener mDropListener =
-        new TouchInterceptor.DropListener() {
+    private TouchInterceptorListView.DropListener mDropListener =
+        new TouchInterceptorListView.DropListener() {
         public void drop(int from, int to) {
         	ExampleArrayAdapter adapter = (ExampleArrayAdapter) getListView().getAdapter();
         	String object = adapter.getItem(from);

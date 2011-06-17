@@ -37,7 +37,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-public class TouchInterceptor extends ListView {
+public class TouchInterceptorListView extends ListView {
     
     private ImageView mDragView;
     private WindowManager mWindowManager;
@@ -82,7 +82,7 @@ public class TouchInterceptor extends ListView {
     private int mItemHeightHalf;
     private Drawable mTrashcan;
 
-    public TouchInterceptor(Context context, AttributeSet attrs) {
+    public TouchInterceptorListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         Resources res = getResources();
