@@ -2,6 +2,7 @@
 package com.teslacoilsw.shared.draganddrop.demo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -17,33 +18,27 @@ import com.teslacoilsw.shared.draganddrop.R;
 import com.teslacoilsw.shared.draganddrop.TouchInterceptorListView;
 
 public class TeslaDragAndDropDemo extends ListActivity {
-	private ListView mExampleList;
-    /** Called when the activity is first created. */
+	private ListView mListView;
 	
-	String[] mArrayOptions = new String[] { "1. One", "2. Two", "3. Three", "4. Four", "5. Five", "Elephant" };
-	ArrayList<String> mArrayListOptions;
+	ArrayList<String> mArrayListOptions = new ArrayList<String>(Arrays.asList(new String[] {
+			"1. One", "2. Two", "3. Three", "4. Four", "5. Five", "Elephant"
+	}));
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        mExampleList = getListView();
-        mExampleList.setOnCreateContextMenuListener(this);
+        mListView = getListView();
+        mListView.setOnCreateContextMenuListener(this);
         
-        mArrayListOptions = new ArrayList<String>(mArrayOptions.length);
-        for (String s : mArrayOptions)
-        	mArrayListOptions.add(s);
-        
-        ((TouchInterceptorListView) mExampleList).setDropListener(mDropListener);
-        mExampleList.setAdapter(new ExampleArrayAdapter(getApplicationContext(), 
+        ((TouchInterceptorListView) mListView).setDropListener(mDropListener);
+        mListView.setAdapter(new MyArrayAdapter(getApplicationContext(), 
         		R.layout.dragrow, mArrayListOptions));
-        
-        mExampleList.setOnCreateContextMenuListener(this);
-        mExampleList.setCacheColorHint(0);
-        ((TouchInterceptorListView) mExampleList).setDropListener(mDropListener);
-        mExampleList.setDivider(null);
-        mExampleList.setSelector(R.drawable.list_selector_background);
+        mListView.setCacheColorHint(0);
+        ((TouchInterceptorListView) mListView).setDropListener(mDropListener);
+        mListView.setDivider(null);
+        mListView.setSelector(R.drawable.list_selector_background);
     }
     
     @Override
@@ -54,14 +49,13 @@ public class TeslaDragAndDropDemo extends ListActivity {
         lv.setDropListener(null);
     }
     
-    static class ViewHolder {
+    private static class ViewHolder {
         TextView label;
     }
-    //ArrayAdapter
-    private class ExampleArrayAdapter extends ArrayAdapter<String>{ 
+    private class MyArrayAdapter extends ArrayAdapter<String>{ 
     	private int mLayoutId;
     	
-        ExampleArrayAdapter(Context context, int row_layout_id, ArrayList<String> arraylist) {
+    	MyArrayAdapter(Context context, int row_layout_id, ArrayList<String> arraylist) {
 			super(context, row_layout_id, arraylist);
 			mLayoutId = row_layout_id;
 		}
@@ -94,10 +88,11 @@ public class TeslaDragAndDropDemo extends ListActivity {
 			return position;
 		}
     }
+    
     private TouchInterceptorListView.DropListener mDropListener =
         new TouchInterceptorListView.DropListener() {
         public void drop(int from, int to) {
-        	ExampleArrayAdapter adapter = (ExampleArrayAdapter) getListView().getAdapter();
+        	MyArrayAdapter adapter = (MyArrayAdapter) getListView().getAdapter();
         	String object = adapter.getItem(from);
         	adapter.remove(object);
         	adapter.insert(object, to);

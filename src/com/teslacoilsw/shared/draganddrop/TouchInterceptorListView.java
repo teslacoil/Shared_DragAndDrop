@@ -123,7 +123,7 @@ public class TouchInterceptorListView extends ListView {
                     int x = (int) ev.getX();
                     int y = (int) ev.getY();
                     int itemnum = pointToPosition(x, y);
-                    if (itemnum == AdapterView.INVALID_POSITION) {
+                    if (itemnum == AdapterView.INVALID_POSITION || itemnum < this.getHeaderViewsCount()) {
                         break;
                     }
                     ViewGroup item = (ViewGroup) getChildAt(itemnum - getFirstVisiblePosition());
